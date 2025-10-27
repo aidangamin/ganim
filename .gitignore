@@ -1,0 +1,18 @@
+# Build directory
+/build/
+/.cache/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Other generated files
+compile_commands.json
