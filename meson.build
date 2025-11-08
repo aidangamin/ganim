@@ -7,16 +7,41 @@ project(
   ]
 )
 
+defines = [
+  '-DLOGGING_COLOR',
+]
+
 cc = meson.get_compiler('cpp')
 
+glad_source = 'glad/src/gl.c'
+main_source = 'src/main.cpp'
+framework_sources = [
+  'src/Render/Shader.cpp',
+  'src/Primitives/Triangle.cpp',
+  'src/Primitives/Lines.cpp',
+  'src/Math/Camera.cpp',
+  'src/Utils/logging.c',
+]
+
 sdl_dep = dependency('sdl3', required: true)
+glm_dep = dependency('glm', required: true)
 
 include_dirs = include_directories('src', 'glad/include')
 
 executable(
   'manim',
-  'src/main.cpp',
-  'glad/src/gl.c',
+
+  main_source,
+  framework_sources,
+  glad_source,
+
   include_directories: include_dirs,
-  dependencies: sdl_dep
+
+  dependencies: [
+    sdl_dep, 
+    glm_dep,
+  ],
+
+  cpp_args: defines,
+  c_args: defines,
 )
